@@ -6,26 +6,26 @@ from wger.settings_global import *
 # Use 'DEBUG = True' to get more details for server errors
 DEBUG = True
 TEMPLATES[0]['OPTIONS']['debug'] = True
-
+STATIC_ROOT = os.path.join(SITE_ROOT, 'staticfiles')
 ADMINS = (
-    ('Your name', 'your_email@example.com'),
-)
+          ('Your name', 'your_email@example.com'),
+          )
 MANAGERS = ADMINS
 
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'test_wger',
-        'USER': 'postgres',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'database.sqlite',
+        'USER': '',
         'PASSWORD': '',
         'HOST': '127.0.0.1',
         'PORT': '',
-    }
+}
 }
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = '2#pl526=dhawlfh=7d_^69ow@ry)b*j4l=oe!u^o_8*mpfi^n-'
+SECRET_KEY = 'e_e^a#btn1a76r@y9@76pplm)kk8f&5zgtjkv22i-5*#_3^z0-'
 
 # Your reCaptcha keys
 RECAPTCHA_PUBLIC_KEY = ''
@@ -39,7 +39,7 @@ SITE_URL = 'http://localhost:8000'
 
 # Path to uploaded files
 # Absolute filesystem path to the directory that will hold user-uploaded files.
-MEDIA_ROOT = '/Users/Upendo/.local/share/wger/media'
+MEDIA_ROOT = '/Users/kjoenzau/.local/share/wger/media'
 MEDIA_URL = '/media/'
 
 # Allow all hosts to access the application. Change if used in production.
