@@ -122,6 +122,11 @@ def view(request, pk):
 
 
 @login_required
+def export_workout():
+    pass
+
+
+@login_required
 def copy_workout(request, pk):
     '''
     Makes a copy of a workout
