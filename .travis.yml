@@ -38,6 +38,7 @@ install:
   - nvm use $TRAVIS_NODE_VERSION
 
   # Install requirements
+  - easy install six
   - pip install -r requirements_devel.txt
   - npm install
   - if [[ "$DB" = "postgresql" ]]; then pip install psycopg2; fi
