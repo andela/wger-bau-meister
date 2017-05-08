@@ -128,24 +128,32 @@ def view(request, pk):
     return render(request, 'workout/view.html', template_data)
 
 
+@login_required
+def imports(request, pk):
+    pass
+
+
+@login_required
 def export(request, pk):
+    '''
+    Exports workouts as json
+    '''
+
     workout = get_object_or_404(Workout, pk=pk)
     user = workout.user
     is_owner = request.user == user
 
     if not is_owner and not user.userprofile.ro_access:
         return HttpResponseForbidden()
-   
     # Process request
     if request.method == 'POST':
-        workout_export_form = WorkoutExportForm(request.POST)
+        # workout_export_form = WorkoutExportForm(request.POST)
 
         data = serializers.serialize('json', Workout.objects.filter(user=request.user))
         response = HttpResponse(data, content_type='application/force-download')
         response['Content-Disposition'] = 'attachment; filename="workouts.json"'  
 
         return response
-    
     else:
         workout_export_form = WorkoutExportForm({'comment': workout.comment})
 

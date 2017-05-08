@@ -257,6 +257,12 @@ an appointment for each training day with the appropriate exercises.{% endblockt
                {% trans "Export this workout" %}
             </a>
         </li>
+         <li>
+            <a href="{% url 'manager:workout:imports' workout.id %}">
+               <span class="{% fa_class 'upload' %}"></span>
+               {% trans "Import custom workout" %}
+            </a>
+        </li>
         {% if is_owner %}
         <li role="separator" class="divider"></li>
         <li>
