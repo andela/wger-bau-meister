@@ -28,6 +28,7 @@ env:
 
 # Install the application
 install:
+  - easy_install six
   # Update nvm and set wanted Node version.
   # We update nvm using the script method instead of git, which is selected
   # automatically, as git won't work because the $HOME/.nvm is not a git
