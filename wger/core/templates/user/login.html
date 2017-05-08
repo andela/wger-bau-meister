@@ -33,7 +33,8 @@
         {% trans "Reset password" %}
     </a>
 </p>
-<a href="{% url 'social:begin' 'twitter' %}?next={{ request.GET.next}}">Login with Twitter</a>
-<br><a href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.GET.next}}">Google+</a>
-<br><a href="{% url 'social:begin' 'facebook' %}?next={{ request.GET.next}}">Login with Facebook</a>
+<h4>Login with your socail account</h4>
+<a href="{% url 'social:begin' 'facebook' %}?next={{ request.GET.next}}"><i class="fa fa-facebook-square" style="font-size:44px" aria-hidden="true" ></i></a>
+<a href="{% url 'social:begin' 'twitter' %}?next={{ request.GET.next}}"><i class="fa fa-twitter-square" style="font-size:44px" aria-hidden="true"></i></a>
+<a href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.GET.next}}"><i class="fa fa-google-plus" style="font-size:44px" aria-hidden="true"></i></a>
 {% endblock %}
