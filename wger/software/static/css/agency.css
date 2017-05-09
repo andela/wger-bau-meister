@@ -404,6 +404,8 @@ header .intro-text .intro-lead-in {
     font-family: "Open Sans Light", Arial, Helvetica, sans-serif;
     font-style: italic;
     font-size: 22px;
+    line-height: 22px;
+    margin-bottom: 25px;
 }
 
 header .intro-text .intro-heading {
@@ -1008,19 +1010,6 @@ body {
     text-align: center;
 }
 
-#divs2 {
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    font-family: 'Open Sans', sans-serif;
-    color: #ffffff;
-    text-align: center;
-}
-
 .div1 {
     background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5)), url('../images/kettlebell-2052775.jpg') no-repeat center center fixed;
 }
@@ -1059,7 +1048,7 @@ body {
     height: 46px;
     border-radius: 13px;
     border: 2px solid #e8f380;
-    bottom: 5%;
+    bottom: 2%;
     position: absolute;
     left: 51%;
     margin-left: -26px;
@@ -1146,7 +1135,7 @@ body {
     display: block;
     margin: 0 auto;
     width: 20%;
-    bottom: 12%;
+    bottom: 9%;
     position: absolute;
     left: 12%;
     margin-left: -26px;
@@ -1156,7 +1145,7 @@ body {
     display: block;
     margin: 0 auto;
     width: 20%;
-    bottom: 12%;
+    bottom: 9%;
     position: absolute;
     right: 11%;
     margin-left: -26px;
@@ -1166,7 +1155,7 @@ body {
     display: block;
     margin: 0 auto;
     width: 20%;
-    bottom: 12%;
+    bottom: 9%;
     position: absolute;
     left: 42%;
     margin-left: -26px;
@@ -1266,7 +1255,7 @@ h1 {
     text-align: center;
     padding: 0em;
     position: relative;
-    left: 0%;
+    left: 40%;
     top: 0em;
     transition: font-size .3s ease, left .3s ease;
 }
@@ -1356,7 +1345,7 @@ body {
 
 .slider__txt {
     color: white;
-    font-size: 18px;
+    font-size: 20px;
     margin-bottom: 0rem;
     max-width: 400px;
 }
