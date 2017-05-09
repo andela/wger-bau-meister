@@ -112,9 +112,11 @@ class NutritionPlan(models.Model):
         use_metric = self.user.userprofile.use_metric
         unit = 'kg' if use_metric else 'lb'
 
+        # Retrieve results from cache if they exist.
         result = cache.get(cache_mapper.get_nutrition_cache_key(self.pk))
 
         if not result:
+            # Generate results
             result = {'total': {'energy': 0,
                                 'protein': 0,
                                 'carbohydrates': 0,
@@ -155,10 +157,10 @@ class NutritionPlan(models.Model):
             for key in result.keys():
                 for i in result[key]:
                     result[key][i] = Decimal(result[key][i]).quantize(TWOPLACES)
-
+            # Save nutritional plan to cache
             cache.set(cache_mapper.get_nutrition_cache_key(self.pk), result)
 
-            return result
+        return result
 
     def get_closest_weight_entry(self):
         '''
