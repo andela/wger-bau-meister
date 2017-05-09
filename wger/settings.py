@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import os
+
 from wger.settings_global import *
 
 # Use 'DEBUG = True' to get more details for server errors
@@ -36,7 +38,7 @@ NOCAPTCHA = True
 # This is needed for uploaded files and images (exercise images, etc.) to be
 # properly served.
 SITE_URL = 'http://localhost:8000'
-
+STATIC_ROOT = os.path.join(SITE_ROOT, 'staticfiles')
 # Path to uploaded files
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 MEDIA_ROOT = '/Users/asce1062/.local/share/wger/media'
