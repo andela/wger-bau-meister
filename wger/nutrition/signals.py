@@ -18,7 +18,7 @@ def delete_cache(sender, **kwargs):
     elif sender == Meal:
         pk = model_instance.plan.pk
     elif sender == MealItem:
-        pk = model_instance.pk
+        pk = model_instance.meal.plan.pk
 
     cache.delete(cache_mapper.get_nutrition_cache_key(pk))
     print('Cache deleted')
