@@ -73,7 +73,7 @@ class MuscleSerializer(serializers.ModelSerializer):
         model = Muscle
 
 
-class InfoSerializer(serializers.ModelSerializer):
+class ExerciseInfoSerializer(serializers.ModelSerializer):
     '''
     Info serializer
     '''
