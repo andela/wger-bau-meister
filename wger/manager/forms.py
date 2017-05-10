@@ -76,6 +76,12 @@ class WorkoutCopyForm(Form):
                         required=False)
 
 
+class WorkoutExportForm(Form):
+    comment = CharField(max_length=100,
+                        help_text=_('Give a title to this workout export.'),
+                        required=False)
+
+
 class DayForm(ModelForm):
     class Meta:
         model = Day
