@@ -43,10 +43,9 @@ coverage.xml
 # Translations
 *.mo
 *.pot
-
 # Django stuff:
 *.log
-settings*.py
+settings.py
 *.sqlite
 /CACHE
 
