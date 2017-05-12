@@ -85,7 +85,7 @@ class UserProfile(models.Model):
         permissions = (
             ("deactivate_user", _("Admin: can deactivate a user")),
         )
-        ordering = ["name", ]
+        ordering = ["user", ]
 
     GENDER_MALE = '1'
     GENDER_FEMALE = '2'
