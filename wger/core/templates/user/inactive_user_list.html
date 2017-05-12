@@ -1,11 +1,13 @@
 {% extends "base.html" %}
 {% load i18n staticfiles wger_extras django_bootstrap_breadcrumbs %}
 
-{% block title %}{% trans "Active users list" %}{% endblock %}
+{% block title %}
+    {% trans "Inactive users list" %}
+{% endblock %}
 
 
 {% block content %}
-    {% include 'gym/partial_user_list.html' %}
+    {% include 'gym/inactive_user_list.html' %}
 {% endblock %}
 
 
