@@ -37,9 +37,11 @@ install:
   - nvm install $TRAVIS_NODE_VERSION
   - nvm use $TRAVIS_NODE_VERSION
 
+  # upgrade setuptools separately to avoid race condition
+  - pip install -U setuptools
+  
   # Install requirements
   - pip install -r requirements_devel.txt
-  - pip install -U setuptools
   - npm install
   - if [[ "$DB" = "postgresql" ]]; then pip install psycopg2; fi
 
