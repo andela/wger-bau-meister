@@ -51,8 +51,6 @@ from wger.core.models import Language
 # Nutrition import //_c
 from wger.nutrition.models import (
     Ingredient,
-    IngredientWeightUnit,
-    WeightUnit,
     NutritionPlan,
     Meal,
     MealItem

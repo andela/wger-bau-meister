@@ -31,7 +31,6 @@ from reportlab.lib.pagesizes import A4, cm
 from reportlab.platypus import (
     Paragraph,
     SimpleDocTemplate,
-    Table,
     Spacer
 )
 
