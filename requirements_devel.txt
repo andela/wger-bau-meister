@@ -6,6 +6,5 @@
 -r requirements.txt
 
 # Development packages
-coverage
 Django>=1.9,<1.10
 django-formtools>=1.0,<1.1
