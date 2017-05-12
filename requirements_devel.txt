@@ -2,6 +2,14 @@
 # Requirements for wger for production
 #
 
+# Production packages
+-r requirements.txt
+
+# Development packages
+
+django-debug-toolbar
+coverage
+
 Django>=1.9,<1.10
 django-recaptcha
 reportlab
