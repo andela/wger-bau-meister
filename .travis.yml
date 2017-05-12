@@ -42,7 +42,6 @@ install:
   
   # Install requirements
   - pip install -r requirements_devel.txt
-  - pip install pep8
   - npm install
   - if [[ "$DB" = "postgresql" ]]; then pip install psycopg2; fi
 
