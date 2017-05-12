@@ -81,12 +81,6 @@ class Language(models.Model):
 @python_2_unicode_compatible
 class UserProfile(models.Model):
 
-    class Meta:
-        permissions = (
-            ("deactivate_user", _("Admin: can deactivate a user")),
-        )
-        ordering = ["user", ]
-
     GENDER_MALE = '1'
     GENDER_FEMALE = '2'
     GENDER = (
