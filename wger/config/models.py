@@ -100,8 +100,6 @@ class LanguageConfig(models.Model):
 
         super(LanguageConfig, self).delete(*args, **kwargs)
 
-    # post_delete.connect(delete, sender=Muscle)
-
 
 @python_2_unicode_compatible
 class GymConfig(models.Model):
