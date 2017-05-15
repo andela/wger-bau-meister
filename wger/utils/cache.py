@@ -36,7 +36,9 @@ def delete_template_fragment_cache(fragment_name='', *args):
     '''
     Deletes a cache key created on the template with django's cache tag
     '''
-    cache.delete(get_template_cache_name(fragment_name, *args))
+    key = get_template_cache_name(fragment_name, *args)
+    cache.delete(key)
+    cache.clear()
 
 
 def reset_workout_canonical_form(workout_id):
