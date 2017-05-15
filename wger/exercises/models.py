@@ -91,7 +91,7 @@ class Muscle(models.Model):
             delete_template_fragment_cache('muscle-overview')
             delete_template_fragment_cache('exercise-overview')
             delete_template_fragment_cache('exercise-overview-mobile')
-            delete_template_fragment_cache('equipment-overview'
+            delete_template_fragment_cache('equipment-overview')
 
     def delete(self, *args, **kwargs):
         '''
