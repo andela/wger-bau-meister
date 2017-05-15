@@ -47,6 +47,8 @@ from wger.utils.cache import (
 
 logger = logging.getLogger(__name__)
 
+EMPTY = '-'  # Not "None"
+
 
 @python_2_unicode_compatible
 class Muscle(models.Model):
@@ -83,16 +85,14 @@ class Muscle(models.Model):
         '''
         super(Muscle, self).save(*args, **kwargs)
 
-        # Cached objects
-        
-        cache.delete(cache_mapper.get_exercise_muscle_bg_key(self))
+        cache.set(self.name, name, 2592000)
 
         # Cached template fragments
         for language in Language.objects.all():
-            delete_template_fragment_cache('muscle-overview')
-            delete_template_fragment_cache('exercise-overview')
-            delete_template_fragment_cache('exercise-overview-mobile')
-            delete_template_fragment_cache('equipment-overview')
+            delete_template_fragment_cache('muscle-overview', language.id)
+            delete_template_fragment_cache('exercise-overview', language.id)
+            delete_template_fragment_cache('exercise-overview-mobile', language.id)
+            delete_template_fragment_cache('equipment-overview', language.id)
 
     def delete(self, *args, **kwargs):
         '''
@@ -100,18 +100,24 @@ class Muscle(models.Model):
         '''
 
         # Cached objects
-        cache.delete(cache_mapper.get_exercise_muscle_bg_key(self))
+        cache_key = cache.get(self.name)
+
+        if cache_key:
+            cache.delete(cache_key)
+            print ('\ncache_key ---> Inexistent\n')
+        else:
+            print ('\ncache_key ---> Does EXIST\n')
+            cache.delete(cache_mapper.get_exercise_muscle_bg_key(self))
 
         print ('\nWE ARE HERE---> DELETING')
 
         # Cached template fragments
-        print ('\n')
+        print ('\nNOW WE LOOP')
         for language in Language.objects.all():
-            print ('NOW WE LOOP')
-            delete_template_fragment_cache('muscle-overview')
-            delete_template_fragment_cache('exercise-overview')
-            delete_template_fragment_cache('exercise-overview-mobile')
-            delete_template_fragment_cache('equipment-overview')
+            delete_template_fragment_cache('muscle-overview', language.id)
+            delete_template_fragment_cache('exercise-overview', language.id)
+            delete_template_fragment_cache('exercise-overview-mobile', language.id)
+            delete_template_fragment_cache('equipment-overview', language.id)
         print ('\n')
 
         super(Muscle, self).delete(*args, **kwargs)
