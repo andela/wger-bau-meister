@@ -40,18 +40,6 @@ def delete_template_fragment_cache(fragment_name='', *args):
     key = get_template_cache_name(fragment_name, *args)
     cache.delete(key)
 
-    cache_key = get_cache_key(key)
-    if cache_key:
-        if cache.get(cache_key):
-            # Delete the cache entry.  
-            #
-            # Note that there is a possible race condition here, as another 
-            # process / thread may have refreshed the cache between
-            # the call to cache.get() above, and the cache.set(key, None) 
-            # below.  This may lead to unexpected performance problems under 
-            # severe load.
-            cache.set(key, None, 0)
-        return True
 
 def reset_workout_canonical_form(workout_id):
     cache.delete(cache_mapper.get_workout_canonical(workout_id))
