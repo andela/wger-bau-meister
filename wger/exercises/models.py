@@ -109,10 +109,10 @@ class Muscle(models.Model):
             print ('\ncache_key ---> Does EXIST\n')
             cache.delete(cache_mapper.get_exercise_muscle_bg_key(self))
 
-        print ('\nWE ARE HERE---> DELETING')
+        print ('\nWE ARE HERE---> DELETING\n')
 
         # Cached template fragments
-        print ('\nNOW WE LOOP')
+        print ('NOW WE LOOP')
         for language in Language.objects.all():
             delete_template_fragment_cache('muscle-overview', language.id)
             delete_template_fragment_cache('exercise-overview', language.id)
