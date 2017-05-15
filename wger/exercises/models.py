@@ -87,6 +87,7 @@ class Muscle(models.Model):
         cache.delete(cache_mapper.get_exercise_muscle_bg_key(self))
 
         # Cached template fragments
+        print ('\nWE ARE HERE\n')
         for language in Language.objects.all():
             delete_template_fragment_cache('muscle-overview')
             delete_template_fragment_cache('exercise-overview')
