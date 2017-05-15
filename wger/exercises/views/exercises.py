@@ -105,6 +105,9 @@ def view(request, id, slug=None):
 
     template_data['exercise'] = exercise
 
+    # Cached objects
+    cache.delete(cache_mapper.get_exercise_muscle_bg_key(int(id)))
+
     # Create the backgrounds that show what muscles the exercise works on
     backgrounds = cache.get(cache_mapper.get_exercise_muscle_bg_key(int(id)))
     if not backgrounds:
