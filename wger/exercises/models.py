@@ -89,10 +89,12 @@ class Muscle(models.Model):
         # Cached template fragments
         print ('\nWE ARE HERE\n')
         for language in Language.objects.all():
+            print ('NOW WE LOOP')
             delete_template_fragment_cache('muscle-overview')
             delete_template_fragment_cache('exercise-overview')
             delete_template_fragment_cache('exercise-overview-mobile')
             delete_template_fragment_cache('equipment-overview')
+            print ('\n')
 
     def delete(self, *args, **kwargs):
         '''
