@@ -100,15 +100,18 @@ class Muscle(models.Model):
 
         # Cached objects
         cache.delete(cache_mapper.get_exercise_muscle_bg_key(self))
+
         print ('\nWE ARE HERE---> DELETING\n')
+        cache.clear()
+
         # Cached template fragments
+        print ('\n')
         for language in Language.objects.all():
             print ('NOW WE LOOP')
             delete_template_fragment_cache('muscle-overview', language.id)
             delete_template_fragment_cache('exercise-overview', language.id)
             delete_template_fragment_cache('exercise-overview-mobile', language.id)
             delete_template_fragment_cache('equipment-overview', language.id)
-            print ('\n')
 
         super(Muscle, self).delete(*args, **kwargs)
 
