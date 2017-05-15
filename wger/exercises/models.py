@@ -84,6 +84,7 @@ class Muscle(models.Model):
         super(Muscle, self).save(*args, **kwargs)
 
         # Cached objects
+        
         cache.delete(cache_mapper.get_exercise_muscle_bg_key(self))
 
         # Cached template fragments
@@ -101,17 +102,17 @@ class Muscle(models.Model):
         # Cached objects
         cache.delete(cache_mapper.get_exercise_muscle_bg_key(self))
 
-        print ('\nWE ARE HERE---> DELETING\n')
-        cache.clear()
+        print ('\nWE ARE HERE---> DELETING')
 
         # Cached template fragments
         print ('\n')
         for language in Language.objects.all():
             print ('NOW WE LOOP')
-            delete_template_fragment_cache('muscle-overview', language.id)
-            delete_template_fragment_cache('exercise-overview', language.id)
-            delete_template_fragment_cache('exercise-overview-mobile', language.id)
-            delete_template_fragment_cache('equipment-overview', language.id)
+            delete_template_fragment_cache('muscle-overview')
+            delete_template_fragment_cache('exercise-overview')
+            delete_template_fragment_cache('exercise-overview-mobile')
+            delete_template_fragment_cache('equipment-overview')
+        print ('\n')
 
         super(Muscle, self).delete(*args, **kwargs)
 
