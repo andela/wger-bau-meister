@@ -69,7 +69,7 @@ def delete_exercise_muscle(sender, instance, **kwargs):
     Delete the image, along with its thumbnails, from the disk
     '''
     print('\n')
-    print('Deleted: {}'.format(kwargs['instance'].__dict__))
+    # print('Deleted: {}'.format(kwargs['instance'].__dict__))
     print('Clear Cache')
     # delete_template_fragment_cache('muscle-overview')
     cache.delete(key_from_instance(instance))
