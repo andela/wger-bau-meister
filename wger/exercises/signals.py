@@ -69,12 +69,19 @@ from django.core.cache import cache
 from django.utils.cache import get_cache_key
 from django.utils.encoding import force_bytes
 
+
 # Update the muscle overview cache when a muscle is deleted
 @receiver(post_delete, sender=Muscle)
 def delete_exercise_muscle(sender, instance, **kwargs):
     '''
     Delete the image, along with its thumbnails, from the disk
     '''
+
+    print('\n')
+    # print('Deleted: {}'.format(kwargs['instance'].__dict__))
+    print('Clear Cache')
+    # delete_template_fragment_cache('muscle-overview')
+    # cache.delete(key_from_instance(instance))
 
     fragment_name = 'muscle-overview'
 
@@ -84,11 +91,5 @@ def delete_exercise_muscle(sender, instance, **kwargs):
     cache_key = 'template.cache.{0}.{1}'.format(fragment_name, key_name)
     cache_key = get_template_cache_name(fragment_name, *args)
     cache.delete(cache_key)
-
-    print('\n')
-    # print('Deleted: {}'.format(kwargs['instance'].__dict__))
-    print('Clear Cache')
-    # delete_template_fragment_cache('muscle-overview')
-    cache.delete(key_from_instance(instance))
 
     print('\n')
