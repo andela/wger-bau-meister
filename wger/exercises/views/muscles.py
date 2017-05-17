@@ -16,6 +16,7 @@
 import logging
 
 from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
+from django.core.cache import cache
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.utils.translation import ugettext as _
 from django.utils.translation import ugettext_lazy
@@ -32,6 +33,7 @@ from wger.utils.generic_views import (
     WgerFormMixin,
     WgerDeleteMixin
 )
+from wger.utils.cache import cache_mapper
 from wger.utils.language import load_item_languages
 from wger.config.models import LanguageConfig
 
@@ -117,4 +119,8 @@ class MuscleDeleteView(WgerDeleteMixin, LoginRequiredMixin, PermissionRequiredMi
         context = super(MuscleDeleteView, self).get_context_data(**kwargs)
         context['title'] = _(u'Delete {0}?').format(self.object.name)
         context['form_action'] = reverse('exercise:muscle:delete', kwargs={'pk': self.kwargs['pk']})
+
+        exercise_id = 0
+        exercises = Exercise.objects.all()
+        cache.clear()
         return context

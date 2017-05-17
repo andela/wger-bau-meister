@@ -23,7 +23,6 @@ from easy_thumbnails.signal_handlers import generate_aliases
 from easy_thumbnails.signals import saved_file
 
 from wger.exercises.models import ExerciseImage, Muscle
-from wger.utils.cache import delete_template_fragment_cache
 
 
 @receiver(post_delete, sender=ExerciseImage)
@@ -60,36 +59,3 @@ def delete_exercise_image_on_update(sender, instance, **kwargs):
 
 # Generate thumbnails when uploading a new image
 saved_file.connect(generate_aliases)
-
-
-import logging
-import hashlib
-
-from django.core.cache import cache
-from django.utils.cache import get_cache_key
-from django.utils.encoding import force_bytes
-
-
-# Update the muscle overview cache when a muscle is deleted
-@receiver(post_delete, sender=Muscle)
-def delete_exercise_muscle(sender, instance, **kwargs):
-    '''
-    Delete the image, along with its thumbnails, from the disk
-    '''
-
-    print('\n')
-    # print('Deleted: {}'.format(kwargs['instance'].__dict__))
-    print('Clear Cache')
-    # delete_template_fragment_cache('muscle-overview')
-    # cache.delete(key_from_instance(instance))
-
-    fragment_name = 'muscle-overview'
-
-    # # key = u':'.join([str(arg) for arg in args])
-    # # key_name = hashlib.md5(force_bytes(key)).hexdigest()
-
-    cache_key = 'template.cache.{0}'.format(fragment_name)
-    # cache.clear()
-
-    print('cache_key')
-    print('\n')
