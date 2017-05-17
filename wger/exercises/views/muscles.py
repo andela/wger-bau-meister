@@ -28,7 +28,7 @@ from django.views.generic import (
     UpdateView
 )
 
-from wger.exercises.models import Muscle
+from wger.exercises.models import Muscle, Exercise
 from wger.utils.generic_views import (
     WgerFormMixin,
     WgerDeleteMixin
