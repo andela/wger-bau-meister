@@ -63,10 +63,10 @@ saved_file.connect(generate_aliases)
 
 
 # Update the muscle overview cache when a muscle is deleted
-# @receiver(post_delete, sender=Muscle)
-# def delete_exercise_muscle(sender, instance, **kwargs):
-#     '''
-#     Delete the image, along with its thumbnails, from the disk
-#     '''
-
-#     instance.muscle.delete(save=False)
+@receiver(post_delete, sender=Muscle)
+def delete_exercise_muscle(sender, instance, **kwargs):
+    '''
+    Delete the image, along with its thumbnails, from the disk
+    '''
+    print('Deleted: {}'.format(kwargs['instance'].__dict__))
+    # instance.muscle.delete(save=False)
