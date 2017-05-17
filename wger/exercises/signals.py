@@ -90,6 +90,6 @@ def delete_exercise_muscle(sender, instance, **kwargs):
 
     cache_key = 'template.cache.{0}'.format(fragment_name)
     cache_key = get_template_cache_name(fragment_name)
-    cache.delete(cache_key)
+    # cache.delete(cache_key)
 
     print('\n')
