@@ -62,12 +62,29 @@ def delete_exercise_image_on_update(sender, instance, **kwargs):
 saved_file.connect(generate_aliases)
 
 
+import logging
+import hashlib
+
+from django.core.cache import cache
+from django.utils.cache import get_cache_key
+from django.utils.encoding import force_bytes
+
 # Update the muscle overview cache when a muscle is deleted
 @receiver(post_delete, sender=Muscle)
 def delete_exercise_muscle(sender, instance, **kwargs):
     '''
     Delete the image, along with its thumbnails, from the disk
     '''
+
+    fragment_name = 'muscle-overview'
+
+    key = u':'.join([str(arg) for arg in args])
+    key_name = hashlib.md5(force_bytes(key)).hexdigest()
+
+    cache_key = 'template.cache.{0}.{1}'.format(fragment_name, key_name)
+    cache_key = get_template_cache_name(fragment_name, *args)
+    cache.delete(cache_key)
+
     print('\n')
     # print('Deleted: {}'.format(kwargs['instance'].__dict__))
     print('Clear Cache')
