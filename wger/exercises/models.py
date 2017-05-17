@@ -79,49 +79,6 @@ class Muscle(models.Model):
         '''
         return False
 
-    def save(self, *args, **kwargs):
-        '''
-        Reset all cached infos
-        '''
-        super(Muscle, self).save(*args, **kwargs)
-
-        cache.set(self.name, name, 2592000)
-
-        # Cached template fragments
-        for language in Language.objects.all():
-            delete_template_fragment_cache('muscle-overview', language.id)
-            delete_template_fragment_cache('exercise-overview', language.id)
-            delete_template_fragment_cache('exercise-overview-mobile', language.id)
-            delete_template_fragment_cache('equipment-overview', language.id)
-
-    def delete(self, *args, **kwargs):
-        '''
-        Reset all cached infos
-        '''
-
-        # Cached objects
-        cache_key = cache.get(self.name)
-
-        if cache_key:
-            cache.delete(cache_key)
-            print ('\ncache_key ---> Inexistent\n')
-        else:
-            print ('\ncache_key ---> Does EXIST\n')
-            cache.delete(cache_mapper.get_exercise_muscle_bg_key(self))
-
-        print ('\nWE ARE HERE---> DELETING\n')
-
-        # Cached template fragments
-        print ('NOW WE LOOP')
-        for language in Language.objects.all():
-            delete_template_fragment_cache('muscle-overview', language.id)
-            delete_template_fragment_cache('exercise-overview', language.id)
-            delete_template_fragment_cache('exercise-overview-mobile', language.id)
-            delete_template_fragment_cache('equipment-overview', language.id)
-        print ('\n')
-
-        super(Muscle, self).delete(*args, **kwargs)
-
 
 @python_2_unicode_compatible
 class Equipment(models.Model):
