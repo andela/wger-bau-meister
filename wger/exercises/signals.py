@@ -64,7 +64,7 @@ saved_file.connect(generate_aliases)
 
 # Update the muscle overview cache when a muscle is deleted
 @receiver(post_delete, sender=Muscle)
-def delete_exercise_muscle(sender,instance. **kwargs):
+def delete_exercise_muscle(sender, instance, **kwargs):
     '''
     Delete the image, along with its thumbnails, from the disk
     '''
@@ -73,6 +73,5 @@ def delete_exercise_muscle(sender,instance. **kwargs):
     print('Clear Cache')
     # delete_template_fragment_cache('muscle-overview')
     cache.delete(key_from_instance(instance))
-
 
     print('\n')
