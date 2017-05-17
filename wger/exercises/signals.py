@@ -61,8 +61,6 @@ def delete_exercise_image_on_update(sender, instance, **kwargs):
 # Generate thumbnails when uploading a new image
 saved_file.connect(generate_aliases)
 
-from wger.utils.cache import delete_template_fragment_cache
-
 
 # Update the muscle overview cache when a muscle is deleted
 @receiver(post_delete, sender=Muscle)
@@ -73,7 +71,5 @@ def delete_exercise_muscle(sender, **kwargs):
     print('\n')
     print('Deleted: {}'.format(kwargs['instance'].__dict__))
     delete_template_fragment_cache('muscle-overview')
-    print('\n')
 
-    
-    # instance.muscle.delete(save=False)
+    print('\n')
