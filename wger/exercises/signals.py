@@ -22,7 +22,7 @@ from easy_thumbnails.files import get_thumbnailer
 from easy_thumbnails.signal_handlers import generate_aliases
 from easy_thumbnails.signals import saved_file
 
-from wger.exercises.models import ExerciseImage
+from wger.exercises.models import ExerciseImage, Muscle
 from wger.utils.cache import delete_template_fragment_cache
 
 
@@ -60,3 +60,13 @@ def delete_exercise_image_on_update(sender, instance, **kwargs):
 
 # Generate thumbnails when uploading a new image
 saved_file.connect(generate_aliases)
+
+
+# Update the muscle overview cache when a muscle is deleted
+@receiver(post_delete, sender=Muscle)
+def delete_exercise_muscle(sender, instance, **kwargs):
+    '''
+    Delete the image, along with its thumbnails, from the disk
+    '''
+    
+    instance.muscle.delete(save=False)
