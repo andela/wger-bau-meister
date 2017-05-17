@@ -83,12 +83,12 @@ def delete_exercise_muscle(sender, instance, **kwargs):
     # delete_template_fragment_cache('muscle-overview')
     # cache.delete(key_from_instance(instance))
 
-    fragment_name = 'muscle-overview'
+    # fragment_name = 'muscle-overview'
 
-    # key = u':'.join([str(arg) for arg in args])
-    # key_name = hashlib.md5(force_bytes(key)).hexdigest()
+    # # key = u':'.join([str(arg) for arg in args])
+    # # key_name = hashlib.md5(force_bytes(key)).hexdigest()
 
-    cache_key = 'template.cache.{0}'.format(fragment_name)
-    cache.delete(cache_key)
+    # cache_key = 'template.cache.{0}'.format(fragment_name)
+    cache.clear()
 
     print('\n')
