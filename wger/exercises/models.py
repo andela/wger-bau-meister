@@ -88,8 +88,8 @@ class Muscle(models.Model):
 
         for exercise in exercises:
             for language in Language.objects.all():
-                delete_template_fragment_cache('exercise-detail-muscles',
-                                               exercise.id, language.id)
+                delete_template_fragment_cache('muscle-overview', language.id)
+                
         super(Muscle, self).delete(*args, **kwargs)
 
 
