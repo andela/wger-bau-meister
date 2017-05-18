@@ -244,6 +244,8 @@ def registration(request):
                 config.user = user
                 config.save()
 
+            user.userprofile.adding_permissions = True
+
             user.userprofile.save()
 
             user = authenticate(username=username, password=password)
