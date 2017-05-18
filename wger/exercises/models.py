@@ -84,12 +84,11 @@ class Muscle(models.Model):
         '''
         Clear template cache and delete a muscle
         '''
-        exercises = Exercise.objects.filter(Q(muscles=self) | Q(muscles_secondary=self)).all()
+        # exercises = Exercise.objects.filter(Q(muscles=self) | Q(muscles_secondary=self)).all()
 
-        for exercise in exercises:
-            for language in Language.objects.all():
-                delete_template_fragment_cache('muscle-overview', language.id)
-                
+        for language in Language.objects.all():
+            delete_template_fragment_cache('muscle-overview', language.id)
+
         super(Muscle, self).delete(*args, **kwargs)
 
 
