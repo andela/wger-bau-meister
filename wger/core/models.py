@@ -313,7 +313,7 @@ by the US Department of Agriculture. It is extremely complete, with around
                                                    default=0)
     '''Number of Days for email weight reminder'''
 
-    adding_permissions = models.BooleanField(default=False)
+    adding_permissions = models.BooleanField(default=True)
 
     @property
     def weight(self):
