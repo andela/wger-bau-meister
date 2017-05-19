@@ -7,7 +7,7 @@ class Command(BaseCommand):
     '''
     Management command to create users via API
     '''
-    help = 'create users via API'
+    help = 'delete users via API'
 
     def add_arguments(self, parser):
         # add commandline arguments
@@ -27,8 +27,7 @@ class Command(BaseCommand):
         elif User.objects.filter(email=options["email"]):
             raise CommandError("Email {} already in use.".format(options["email"]))
         elif options["creator_username"] in all_users:
-            raise CommandError("The person with username {} has no permission of creating new users".format(
-                options["creator_username"].upper()))
+            raise CommandError("There is no creator with username has no permission")
         else:
             if creator:
                 # create user with default password
