@@ -70,17 +70,19 @@ class UserProfileViewSet(viewsets.ModelViewSet):
         user = self.get_object().user
         return Response(UsernameSerializer(user).data)
 
+
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
-  serializer_class = UserCreationSerializer
-  queryset = User.objects.all()
-  def create(self, request):
-      serializer = self.get_serializer(data=request.data)
-      if serializer.is_valid():
-          user = User.objects.create_user(username=serializer.validated_data['username'],
-                                          email=serializer.validated_data['email'],
-                                          password=serializer.validated_data['password'])
-          return Response(serializer.data, status.HTTP_201_CREATED)
-      return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
+    serializer_class = UserCreationSerializer
+    queryset = User.objects.all()
+
+    def create(self, request):
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            user = User.objects.create_user(username=serializer.validated_data['username'],
+                                            email=serializer.validated_data['email'],
+                                            password=serializer.validated_data['password'])
+            return Response(serializer.data, status.HTTP_201_CREATED)
+        return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
 
 
 class LanguageViewSet(viewsets.ReadOnlyModelViewSet):

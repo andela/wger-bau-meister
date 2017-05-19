@@ -81,12 +81,12 @@ class WeightUnitSerializer(serializers.ModelSerializer):
     class Meta:
         model = WeightUnit
 
-class UserCreationSerializer(serializers.ModelSerializer):
-     '''
-     Add user serializer
-     '''
 
-     class Meta:
-         model = User
-         fields = ('username','email','password')
-         extra_kwargs = {'password': {'write_only': True}}
+class UserCreationSerializer(serializers.ModelSerializer):
+    '''
+    Add user serializer
+    '''
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password')
+        extra_kwargs = {'password': {'write_only': True}}
