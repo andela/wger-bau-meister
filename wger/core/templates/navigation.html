@@ -114,6 +114,19 @@
                         </li>
                         {% endif %}
 
+                        {#            #}
+                        {# Fitbit tab #}
+                        {#            #}
+                        {% if user.is_authenticated and not user.userprofile.is_temporary %}
+                         <li {% if active_tab == 'fitbit' %}class="active"{% endif %}>
+                             <a href="{% url 'core:fitbit' %}">
+
+                                {% trans "Fitbit" %}
+
+                             </a>
+                         </li>
+                         {% endif %}
+
 
                         {#              #}
                         {# Software tab #}
