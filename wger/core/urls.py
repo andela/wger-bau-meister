@@ -190,6 +190,11 @@ urlpatterns = [
         misc.dashboard,
         name='dashboard'),
 
+    # Fitbit auth
+    url(r'^fitbit$',
+        user.fitbit_authorisation,
+        name='fitbit'),
+
     # Others
     url(r'^about$',
         TemplateView.as_view(template_name="misc/about.html"),
