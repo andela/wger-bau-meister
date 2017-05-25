@@ -82,15 +82,17 @@ class Muscle(models.Model):
         '''
         return False
 
-    @receiver(post_delete, sender=Muscle)
-    def update_cache_on_delete(sender, instance, *args, **kwargs):
-        for language in Language.objects.all():
-            delete_template_fragment_cache('muscle-overview', language.id)
 
-    @receiver(post_save, sender=Muscle)
-    def update_cache_on_save(sender, *args, **kwargs):
-        for language in Language.objects.all():
-            delete_template_fragment_cache('muscle-overview', language.id)
+@receiver(post_delete, sender=Muscle)
+def update_cache_on_delete(sender, instance, *args, **kwargs):
+    for language in Language.objects.all():
+        delete_template_fragment_cache('muscle-overview', language.id)
+
+
+@receiver(post_save, sender=Muscle)
+def update_cache_on_save(sender, *args, **kwargs):
+    for language in Language.objects.all():
+        delete_template_fragment_cache('muscle-overview', language.id)
 
 
 @python_2_unicode_compatible
@@ -256,7 +258,8 @@ class Exercise(AbstractSubmissionModel, AbstractLicenseModel, models.Model):
             delete_template_fragment_cache('exercise-overview', language.id)
             delete_template_fragment_cache('exercise-overview-mobile', language.id)
             delete_template_fragment_cache('equipment-overview', language.id)
-            cache.delete(make_template_fragment_key('exercise-detail-muscles', [self.id, language.id]))
+            cache.delete(make_template_fragment_key(
+                'exercise-detail-muscles', [self.id, language.id]))
 
         # Cached workouts
         for set in self.set_set.all():
@@ -276,7 +279,8 @@ class Exercise(AbstractSubmissionModel, AbstractLicenseModel, models.Model):
             delete_template_fragment_cache('exercise-overview', language.id)
             delete_template_fragment_cache('exercise-overview-mobile', language.id)
             delete_template_fragment_cache('equipment-overview', language.id)
-            cache.delete(make_template_fragment_key('exercise-detail-muscles', [self.id, language.id]))
+            cache.delete(make_template_fragment_key(
+                'exercise-detail-muscles', [self.id, language.id]))
 
         # Cached workouts
         for set in self.set_set.all():
