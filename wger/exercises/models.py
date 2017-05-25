@@ -22,6 +22,8 @@ import bleach
 
 from django.db import models
 from django.db.models import Q
+from django.db.models.signals import post_save, post_delete, pre_save, pre_delete
+from django.dispatch import receiver
 from django.template.loader import render_to_string
 from django.template.defaultfilters import slugify  # django.utils.text.slugify in django 1.5!
 from django.contrib.auth.models import User
@@ -80,16 +82,15 @@ class Muscle(models.Model):
         '''
         return False
 
-    def delete(self, *args, **kwargs):
-        '''
-        Clear template cache and delete a muscle
-        '''
-        # exercises = Exercise.objects.filter(Q(muscles=self) | Q(muscles_secondary=self)).all()
-
+    @receiver(post_delete, sender=Muscle)
+    def update_cache_on_delete(sender, instance, *args, **kwargs):
         for language in Language.objects.all():
             delete_template_fragment_cache('muscle-overview', language.id)
 
-        super(Muscle, self).delete(*args, **kwargs)
+    @receiver(post_save, sender=Muscle)
+    def update_cache_on_save(sender, *args, **kwargs):
+        for language in Language.objects.all():
+            delete_template_fragment_cache('muscle-overview', language.id)
 
 
 @python_2_unicode_compatible
@@ -255,6 +256,7 @@ class Exercise(AbstractSubmissionModel, AbstractLicenseModel, models.Model):
             delete_template_fragment_cache('exercise-overview', language.id)
             delete_template_fragment_cache('exercise-overview-mobile', language.id)
             delete_template_fragment_cache('equipment-overview', language.id)
+            cache.delete(make_template_fragment_key('exercise-detail-muscles', [self.id, language.id]))
 
         # Cached workouts
         for set in self.set_set.all():
@@ -274,6 +276,7 @@ class Exercise(AbstractSubmissionModel, AbstractLicenseModel, models.Model):
             delete_template_fragment_cache('exercise-overview', language.id)
             delete_template_fragment_cache('exercise-overview-mobile', language.id)
             delete_template_fragment_cache('equipment-overview', language.id)
+            cache.delete(make_template_fragment_key('exercise-detail-muscles', [self.id, language.id]))
 
         # Cached workouts
         for set in self.set_set.all():
