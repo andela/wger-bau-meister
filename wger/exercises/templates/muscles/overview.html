@@ -74,7 +74,7 @@ $(document).ready(function() {
         {% endfor %}
     </div>
     <div class="col-sm-4 col-xs-12">
-        {% for muscle in muscle_list gf%}
+        {% for muscle in muscle_list %}
             <div id="muscle-{{muscle.id}}" style="display:none;" class="exercise-list">
                 <h4>{% trans "Exercises" %}</h4>
                 <ul class="exercise-overview">
