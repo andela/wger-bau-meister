@@ -1,0 +1,2 @@
+FATAL:  pre-existing shared memory block (key 5432001, ID 262144) is still in use
+HINT:  If you're sure there are no old server processes still running, remove the shared memory block or just delete the file "postmaster.pid".

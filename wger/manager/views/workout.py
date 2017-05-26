@@ -151,8 +151,7 @@ def export(request, pk):
 
         data = serializers.serialize('json', Workout.objects.filter(user=request.user))
         response = HttpResponse(data, content_type='application/force-download')
-        response['Content-Disposition'] = 'attachment; filename="workouts.json"'  
-
+        response['Content-Disposition'] = 'attachment; filename="workouts.json"'
         return response
     else:
         workout_export_form = WorkoutExportForm({'comment': workout.comment})
