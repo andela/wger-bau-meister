@@ -42,7 +42,7 @@ from wger.utils.helpers import smart_capitalize
 from wger.utils.managers import SubmissionManager
 from wger.utils.models import AbstractLicenseModel, AbstractSubmissionModel
 from wger.utils.cache import (
-    get_template_cache_name
+    get_template_cache_name,
     delete_template_fragment_cache,
     reset_workout_canonical_form,
     cache_mapper
