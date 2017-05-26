@@ -42,6 +42,7 @@ from wger.utils.helpers import smart_capitalize
 from wger.utils.managers import SubmissionManager
 from wger.utils.models import AbstractLicenseModel, AbstractSubmissionModel
 from wger.utils.cache import (
+    get_template_cache_name
     delete_template_fragment_cache,
     reset_workout_canonical_form,
     cache_mapper
@@ -258,7 +259,7 @@ class Exercise(AbstractSubmissionModel, AbstractLicenseModel, models.Model):
             delete_template_fragment_cache('exercise-overview', language.id)
             delete_template_fragment_cache('exercise-overview-mobile', language.id)
             delete_template_fragment_cache('equipment-overview', language.id)
-            cache.delete(make_template_fragment_key(
+            cache.delete(get_template_cache_name(
                 'exercise-detail-muscles', [self.id, language.id]))
 
         # Cached workouts
@@ -279,7 +280,7 @@ class Exercise(AbstractSubmissionModel, AbstractLicenseModel, models.Model):
             delete_template_fragment_cache('exercise-overview', language.id)
             delete_template_fragment_cache('exercise-overview-mobile', language.id)
             delete_template_fragment_cache('equipment-overview', language.id)
-            cache.delete(make_template_fragment_key(
+            cache.delete(get_template_cache_name(
                 'exercise-detail-muscles', [self.id, language.id]))
 
         # Cached workouts
