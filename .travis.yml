@@ -14,9 +14,9 @@ sudo: false
 
 # Python versions to test
 python:
-  - "2.7"
-  - "3.4"
-  - "3.5"
+ # - "2.7"
+  - "3.6"
+
 
 # Manually define here the combinations environment variables to test
 # https://github.com/travis-ci/travis-ci/issues/1519
@@ -37,6 +37,9 @@ install:
   - nvm install $TRAVIS_NODE_VERSION
   - nvm use $TRAVIS_NODE_VERSION
 
+  # upgrade setuptools separately to avoid race condition
+  - pip install -U setuptools
+  
   # Install requirements
   - pip install -r requirements_devel.txt
   - npm install
@@ -60,7 +63,7 @@ script:
   - gulp lint
 
   # Regular application
-  - coverage run --source='.' ./manage.py test
+  - coverage run --source='wger' ./manage.py test
 
 
   # Code coverage
