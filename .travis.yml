@@ -28,7 +28,6 @@ env:
 
 # Install the application
 install:
- 
   # Update nvm and set wanted Node version.
   # We update nvm using the script method instead of git, which is selected
   # automatically, as git won't work because the $HOME/.nvm is not a git
@@ -37,16 +36,11 @@ install:
   - . $HOME/.nvm/nvm.sh
   - nvm install $TRAVIS_NODE_VERSION
   - nvm use $TRAVIS_NODE_VERSION
-<<<<<<< HEAD
 
   # upgrade setuptools separately to avoid race condition
   - pip install -U setuptools
   
-=======
- 
->>>>>>> 610682ad7a8dbc4350f8bbfe7f7c07cd4ab52bd9
   # Install requirements
-  - pip install six
   - pip install -r requirements_devel.txt
   - npm install
   - if [[ "$DB" = "postgresql" ]]; then pip install psycopg2; fi
