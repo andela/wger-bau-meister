@@ -1,6 +1,10 @@
 #
-# Requirements for wger during development
+# Requirements for wger for production
 #
 
 # Production packages
 -r requirements.txt
+
+# Development packages
+Django>=1.9,<1.10
+django-formtools>=1.0,<1.1
