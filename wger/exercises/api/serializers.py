@@ -71,3 +71,11 @@ class MuscleSerializer(serializers.ModelSerializer):
     '''
     class Meta:
         model = Muscle
+
+
+class ExerciseInfoSerializer(serializers.ModelSerializer):
+    '''
+    Info serializer
+    '''
+    class Meta:
+        model = Exercise

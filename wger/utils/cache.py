@@ -16,6 +16,7 @@ import logging
 import hashlib
 
 from django.core.cache import cache
+from django.utils.cache import get_cache_key
 from django.utils.encoding import force_bytes
 
 
@@ -36,7 +37,8 @@ def delete_template_fragment_cache(fragment_name='', *args):
     '''
     Deletes a cache key created on the template with django's cache tag
     '''
-    cache.delete(get_template_cache_name(fragment_name, *args))
+    key = get_template_cache_name(fragment_name, *args)
+    cache.delete(key)
 
 
 def reset_workout_canonical_form(workout_id):

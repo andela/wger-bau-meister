@@ -80,6 +80,7 @@ class Language(models.Model):
 
 @python_2_unicode_compatible
 class UserProfile(models.Model):
+
     GENDER_MALE = '1'
     GENDER_FEMALE = '2'
     GENDER = (
@@ -348,8 +349,8 @@ by the US Department of Agriculture. It is extremely complete, with around
         Make sure the total amount of hours is 24
         '''
         if ((self.sleep_hours and self.freetime_hours and self.work_hours)
-           and (self.sleep_hours + self.freetime_hours + self.work_hours) > 24):
-                raise ValidationError(_('The sum of all hours has to be 24'))
+                and (self.sleep_hours + self.freetime_hours + self.work_hours) > 24):
+            raise ValidationError(_('The sum of all hours has to be 24'))
 
     def __str__(self):
         '''

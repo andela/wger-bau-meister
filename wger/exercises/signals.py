@@ -14,7 +14,7 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 
-
+from django.core.cache import cache
 from django.db.models.signals import pre_save
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
@@ -22,7 +22,7 @@ from easy_thumbnails.files import get_thumbnailer
 from easy_thumbnails.signal_handlers import generate_aliases
 from easy_thumbnails.signals import saved_file
 
-from wger.exercises.models import ExerciseImage
+from wger.exercises.models import ExerciseImage, Muscle
 
 
 @receiver(post_delete, sender=ExerciseImage)

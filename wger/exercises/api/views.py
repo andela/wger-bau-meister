@@ -32,7 +32,8 @@ from wger.exercises.api.serializers import (
     ExerciseImageSerializer,
     ExerciseCategorySerializer,
     EquipmentSerializer,
-    ExerciseCommentSerializer
+    ExerciseCommentSerializer,
+    ExerciseInfoSerializer
 )
 from wger.exercises.models import (
     Exercise,
@@ -207,3 +208,23 @@ class MuscleViewSet(viewsets.ReadOnlyModelViewSet):
     ordering_fields = '__all__'
     filter_fields = ('name',
                      'is_front')
+
+
+class ExerciseInfoViewSet(viewsets.ReadOnlyModelViewSet):
+    '''
+    API endpoint for exercise info
+    '''
+    queryset = Exercise.objects.all()
+    serializer_class = ExerciseInfoSerializer
+    ordering_fields = '__all__'
+    filter_fields = ('category',
+                     'creation_date',
+                     'description',
+                     'language',
+                     'muscles',
+                     'muscles_secondary',
+                     'status',
+                     'name',
+                     'equipment',
+                     'license',
+                     'license_author')

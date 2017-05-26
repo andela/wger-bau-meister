@@ -21,6 +21,9 @@ import logging
 import bleach
 
 from django.db import models
+from django.db.models import Q
+from django.db.models.signals import post_save, post_delete, pre_save, pre_delete
+from django.dispatch import receiver
 from django.template.loader import render_to_string
 from django.template.defaultfilters import slugify  # django.utils.text.slugify in django 1.5!
 from django.contrib.auth.models import User
@@ -39,6 +42,7 @@ from wger.utils.helpers import smart_capitalize
 from wger.utils.managers import SubmissionManager
 from wger.utils.models import AbstractLicenseModel, AbstractSubmissionModel
 from wger.utils.cache import (
+    get_template_cache_name,
     delete_template_fragment_cache,
     reset_workout_canonical_form,
     cache_mapper
@@ -46,6 +50,8 @@ from wger.utils.cache import (
 
 
 logger = logging.getLogger(__name__)
+
+EMPTY = '-'  # Not "None"
 
 
 @python_2_unicode_compatible
@@ -76,6 +82,18 @@ class Muscle(models.Model):
         Muscle has no owner information
         '''
         return False
+
+
+@receiver(post_delete, sender=Muscle)
+def update_cache_on_delete(sender, instance, *args, **kwargs):
+    for language in Language.objects.all():
+        delete_template_fragment_cache('muscle-overview', language.id)
+
+
+@receiver(post_save, sender=Muscle)
+def update_cache_on_save(sender, *args, **kwargs):
+    for language in Language.objects.all():
+        delete_template_fragment_cache('muscle-overview', language.id)
 
 
 @python_2_unicode_compatible
@@ -241,6 +259,8 @@ class Exercise(AbstractSubmissionModel, AbstractLicenseModel, models.Model):
             delete_template_fragment_cache('exercise-overview', language.id)
             delete_template_fragment_cache('exercise-overview-mobile', language.id)
             delete_template_fragment_cache('equipment-overview', language.id)
+            cache.delete(get_template_cache_name(
+                'exercise-detail-muscles', [self.id, language.id]))
 
         # Cached workouts
         for set in self.set_set.all():
@@ -260,6 +280,8 @@ class Exercise(AbstractSubmissionModel, AbstractLicenseModel, models.Model):
             delete_template_fragment_cache('exercise-overview', language.id)
             delete_template_fragment_cache('exercise-overview-mobile', language.id)
             delete_template_fragment_cache('equipment-overview', language.id)
+            cache.delete(get_template_cache_name(
+                'exercise-detail-muscles', [self.id, language.id]))
 
         # Cached workouts
         for set in self.set_set.all():
@@ -428,10 +450,10 @@ class ExerciseImage(AbstractSubmissionModel, AbstractLicenseModel, models.Model)
                 .filter(is_main=False) \
                 .count():
 
-                image = ExerciseImage.objects.accepted() \
-                    .filter(exercise=self.exercise, is_main=False)[0]
-                image.is_main = True
-                image.save()
+            image = ExerciseImage.objects.accepted() \
+                .filter(exercise=self.exercise, is_main=False)[0]
+            image.is_main = True
+            image.save()
 
     def get_owner_object(self):
         '''
